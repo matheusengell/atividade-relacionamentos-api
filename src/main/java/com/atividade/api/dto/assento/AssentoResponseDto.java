@@ -1,4 +1,8 @@
 package com.atividade.api.dto.assento;
 
-public record AssentoResponseDto() {
+public record AssentoResponseDto(
+        Long id,
+        String codigo,
+        Long funcionarioId
+) {
 }

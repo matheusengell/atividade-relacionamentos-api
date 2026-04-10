@@ -1,4 +1,12 @@
 package com.atividade.api.dto.projeto;
 
-public record ProjetoResponseDto() {
+import com.atividade.api.model.Funcionario;
+
+import java.util.List;
+
+public record ProjetoResponseDto(
+        Long id,
+        String nome,
+        List<Funcionario> funcionario)
+{
 }
