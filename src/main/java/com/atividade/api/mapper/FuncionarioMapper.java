@@ -3,6 +3,7 @@ package com.atividade.api.mapper;
 import com.atividade.api.dto.funcionario.FuncionarioRequestDto;
 import com.atividade.api.dto.funcionario.FuncionarioResponseDto;
 import com.atividade.api.model.Funcionario;
+import com.atividade.api.model.Projeto;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -17,8 +18,11 @@ public class FuncionarioMapper {
         return new FuncionarioResponseDto(
                 funcionario.getId(),
                 funcionario.getNome(),
-                funcionario.getAssento(),
-                funcionario.getProjetos()
+                funcionario.getAssento().getId(),
+                funcionario.getProjetos().stream()
+                        .map(Projeto::getId)
+                        .toList()
         );
     }
+
 }

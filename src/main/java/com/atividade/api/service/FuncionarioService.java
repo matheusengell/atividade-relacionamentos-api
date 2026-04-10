@@ -46,6 +46,32 @@ public class FuncionarioService {
                 .map(mapper::paraDto)
                 .toList();
     }
+    public FuncionarioResponseDto atualizar(FuncionarioRequestDto requestDto, Long id) {
+        Funcionario funcionario = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Funcionário não encontrado"));
+
+        Assento assento = assentoRepository.findById(requestDto.assentoId())
+                .orElseThrow(() -> new RuntimeException("Nenhum assento encontrado"));
+
+        List<Projeto> projetos = projetoRepository.findAllById(requestDto.projetoIds());
+        if (projetos.isEmpty() && !requestDto.projetoIds().isEmpty()) {
+            throw new RuntimeException("Nenhum projeto encontrado");
+        }
+        mapper.paraEntidade(requestDto);
+        funcionario.setAssento(assento);
+        funcionario.setProjetos(projetos);
+
+        return mapper.paraDto(repository.save(funcionario));
+    }
+
+
+    public void deletar(Long id) {
+        if (!repository.existsById(id)) {
+            throw new RuntimeException("Funcionário não encontrado para exclusão");
+        }
+        repository.deleteById(id);
+    }
+
 
 
 }

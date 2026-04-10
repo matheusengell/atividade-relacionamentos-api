@@ -33,14 +33,11 @@ public class AssentoService {
 
     public AssentoResponseDto atualizar(AssentoRequestDto requestDto, Long id){
         Assento assento = repository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Assento não encontrado"));
+                .orElseThrow(() -> new RuntimeException("Assento não encontrado"));
 
-        assento.setId(assento.getId());
-        assento.setCodigo(assento.getCodigo());
-        assento.setFuncionario(assento.getFuncionario());
+        assento.setCodigo(requestDto.codigo());
 
-        Assento novoAssento = repository.save(assento);
-        return mapper.paraDto(novoAssento);
+        return mapper.paraDto(repository.save(assento));
     }
 
     public void deletar(Long id){

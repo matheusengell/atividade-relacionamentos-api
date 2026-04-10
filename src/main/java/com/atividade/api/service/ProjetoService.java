@@ -35,9 +35,7 @@ public class ProjetoService {
         Projeto projeto = repository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Projeto não encontrado"));
 
-        projeto.setId(projeto.getId());
-        projeto.setNome(projeto.getNome());
-        projeto.setFuncionarios(projeto.getFuncionarios());
+        projeto.setNome(requestDto.nome());
 
         return mapper.paraDto(projeto);
     }

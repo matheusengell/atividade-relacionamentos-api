@@ -1,7 +1,5 @@
 package com.atividade.api.dto.funcionario;
 
-import com.atividade.api.model.Assento;
-import com.atividade.api.model.Funcionario;
 import com.atividade.api.model.Projeto;
 
 import java.util.List;
@@ -12,4 +10,6 @@ public record FuncionarioResponseDto(
         Long assentoId,
         List<Long> projetos
 ) {
+
+
 }
