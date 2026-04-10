@@ -1,4 +1,7 @@
 package com.atividade.api.repository;
 
-public interface ProjetoRepository {
+import com.atividade.api.model.Projeto;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ProjetoRepository extends JpaRepository<Projeto,Long> {
 }

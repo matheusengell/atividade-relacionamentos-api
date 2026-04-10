@@ -6,7 +6,7 @@ import java.util.List;
 
 public record ProjetoResponseDto(
         Long id,
-        String nome,
-        List<Funcionario> funcionario)
+        String nome
+)
 {
 }

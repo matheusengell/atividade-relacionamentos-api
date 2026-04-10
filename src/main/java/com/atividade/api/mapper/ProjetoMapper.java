@@ -3,7 +3,9 @@ package com.atividade.api.mapper;
 import com.atividade.api.dto.projeto.ProjetoRequestDto;
 import com.atividade.api.dto.projeto.ProjetoResponseDto;
 import com.atividade.api.model.Projeto;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ProjetoMapper {
 
     public Projeto paraEntidade(ProjetoRequestDto requestDto){
@@ -15,8 +17,7 @@ public class ProjetoMapper {
     public ProjetoResponseDto paraDto(Projeto projeto){
         return new ProjetoResponseDto(
                 projeto.getId(),
-                projeto.getNome(),
-                projeto.getFuncionarios()
+                projeto.getNome()
         );
     }
 }
