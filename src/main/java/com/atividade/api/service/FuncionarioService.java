@@ -1,5 +1,7 @@
 package com.atividade.api.service;
 
+import com.atividade.api.dto.funcionario.FuncionarioComAssentoResponseDto;
+import com.atividade.api.dto.funcionario.FuncionarioProjetoResponseDto;
 import com.atividade.api.dto.funcionario.FuncionarioRequestDto;
 import com.atividade.api.dto.funcionario.FuncionarioResponseDto;
 import com.atividade.api.mapper.FuncionarioMapper;
@@ -72,6 +74,30 @@ public class FuncionarioService {
         repository.deleteById(id);
     }
 
+
+    public FuncionarioComAssentoResponseDto associarFuncionarioAssento(Long idFuncionario, Long idAssento){
+        Funcionario funcionario = repository.findById(idFuncionario)
+                .orElseThrow(()-> new RuntimeException("Funcionário não existe!"));
+
+        Assento assento = assentoRepository.findById(idAssento)
+                .orElseThrow(()-> new RuntimeException("Assento não existe"));
+
+        funcionario.setAssento(assento);
+
+        return mapper.funcionarioComAssentoResponseDto(repository.save(funcionario));
+    }
+
+    public FuncionarioProjetoResponseDto associarFuncionarioProjeto(Long idFuncionario, Long idProjeto){
+        Funcionario funcionario = repository.findById(idFuncionario)
+                .orElseThrow(()-> new RuntimeException("Funcionário não existe"));
+
+        Projeto projeto = projetoRepository.findById(idProjeto)
+                .orElseThrow(()-> new RuntimeException("Assento não existe"));
+
+        funcionario.getProjetos().add(projeto);
+
+        return mapper.funcionarioProjetoResponseDto(repository.save(funcionario));
+    }
 
 
 }

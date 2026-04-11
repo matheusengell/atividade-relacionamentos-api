@@ -1,5 +1,7 @@
 package com.atividade.api.controller;
 
+import com.atividade.api.dto.funcionario.FuncionarioComAssentoResponseDto;
+import com.atividade.api.dto.funcionario.FuncionarioProjetoResponseDto;
 import com.atividade.api.dto.funcionario.FuncionarioRequestDto;
 import com.atividade.api.dto.funcionario.FuncionarioResponseDto;
 import com.atividade.api.model.Funcionario;
@@ -41,5 +43,19 @@ public class FuncionarioController {
         service.deletar(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PatchMapping("/{idFuncionario}/assento/{idAssento}")
+    public ResponseEntity<FuncionarioComAssentoResponseDto> associarAssentoFuncionario(@PathVariable Long idFuncionario, @PathVariable Long idAssento){
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(service.associarFuncionarioAssento(idFuncionario, idAssento));
+    }
+    @PatchMapping("/{idFuncionario}/projeto/{idProjeto}")
+    public ResponseEntity<FuncionarioProjetoResponseDto> associarFuncionarioProjeto(
+            @PathVariable Long idFuncionario, @PathVariable Long idProjeto
+    ){
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(service.associarFuncionarioProjeto(idFuncionario, idProjeto));
+    }
+
 
 }
